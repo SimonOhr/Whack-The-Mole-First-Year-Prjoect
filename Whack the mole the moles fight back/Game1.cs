@@ -1,16 +1,34 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Whack_the_mole_the_moles_fight_back
 {
-    /// <summary>
-    /// This is the main type for your game.
-    /// </summary>
+   
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        Texture2D moleTex;
+        Texture2D moleKOTex;   
+        Texture2D holeTex;
+        Texture2D holeForegroundTex;
+        Texture2D backgroundTex;
+        Texture2D malletTex;
+        Texture2D lightningTex;
+
+        Vector2 moleArrayPos;
+
+        Mole mole;
+
+        Mole[,] moleArray;
+
+        double timer, reset;
+        float interval = 1;
+
+        Random rnd = new Random();
 
         public Game1()
         {
@@ -18,64 +36,88 @@ namespace Whack_the_mole_the_moles_fight_back
             Content.RootDirectory = "Content";
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
+       
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            this.Window.Position = new Point(0, 0);
+            graphics.PreferredBackBufferHeight = 1600;
+            graphics.PreferredBackBufferWidth = 1250;
+            graphics.ApplyChanges();
 
             base.Initialize();
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
         protected override void LoadContent()
-        {
-            // Create a new SpriteBatch, which can be used to draw textures.
+        {            
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            moleTex = Content.Load<Texture2D>(@"MOLE_mole");
+            moleKOTex = Content.Load<Texture2D>(@"MOLE_mole_KO");
+            holeTex = Content.Load<Texture2D>(@"MOLE_hole");
+            holeForegroundTex = Content.Load<Texture2D>(@"MOLE_hole_foreground");
+            backgroundTex = Content.Load<Texture2D>(@"MOLE_background");
+            malletTex = Content.Load<Texture2D>(@"MOLE_mallet");
+            lightningTex = Content.Load<Texture2D>(@"MOLE_lightning");
 
-            // TODO: use this.Content to load your game content here
+            IsMouseVisible = true;
+
+            moleArray = new Mole[7, 10];
+
+            for (int i = 0; i < moleArray.GetLength(0); i++)
+            {
+                for (int j = 0; j < moleArray.GetLength(1); j++)
+                {
+                    int x = j * (moleTex.Width + 50);
+                    int y = 200 + (i * (moleTex.Height + 50));
+                    moleArray[i, j] = new Mole(moleTex, x, y);
+                }
+                
+            }
+
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
+       
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+           
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            timer += gameTime.ElapsedGameTime.TotalSeconds;
 
+            if (timer > interval)
+            {
+                int molePosY = rnd.Next(0, moleArray.GetLength(0));
+                int molePosX = rnd.Next(0, moleArray.GetLength(1));
+                moleArray[molePosY, molePosX].isActive = true;
+
+                timer = reset;
+            }
+
+            foreach (Mole m in moleArray)
+            {
+                m.update(gameTime);
+            }
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
+            GraphicsDevice.Clear(Color.ForestGreen);
+            spriteBatch.Begin();
+            spriteBatch.Draw(backgroundTex, new Vector2(0, 0), Color.White);
+            for (int i = 0; i < moleArray.GetLength(0); i++)
+            {
+                for (int j = 0; j < moleArray.GetLength(1); j++)
+                {
+                    moleArray[i, j].Draw(spriteBatch);
+                }
+            }
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

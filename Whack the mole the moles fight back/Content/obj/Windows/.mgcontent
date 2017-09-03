@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/Simon/Documents/GitHub/Whack-the-mole-the-moles-fight-back/Whack the mole the moles fight back/Content/MOLE_mole_KO.png</File>
+    <File>C:/Users/Simon/Documents/GitHub/Whack-the-mole-the-moles-fight-back/Whack the mole the moles fight back/Content/MOLE_hole.png</File>
+    <File>C:/Users/Simon/Documents/GitHub/Whack-the-mole-the-moles-fight-back/Whack the mole the moles fight back/Content/MOLE_hole_foreground.png</File>
+    <File>C:/Users/Simon/Documents/GitHub/Whack-the-mole-the-moles-fight-back/Whack the mole the moles fight back/Content/MOLE_lightning.png</File>
+    <File>C:/Users/Simon/Documents/GitHub/Whack-the-mole-the-moles-fight-back/Whack the mole the moles fight back/Content/MOLE_mallet.png</File>
+    <File>C:/Users/Simon/Documents/GitHub/Whack-the-mole-the-moles-fight-back/Whack the mole the moles fight back/Content/MOLE_mole.png</File>
+    <File>C:/Users/Simon/Documents/GitHub/Whack-the-mole-the-moles-fight-back/Whack the mole the moles fight back/Content/MOLE_background.png</File>
+  </SourceFiles>
+</SourceFileCollection>
