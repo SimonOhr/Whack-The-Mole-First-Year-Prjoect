@@ -14,18 +14,19 @@ namespace Whack_the_mole_the_moles_fight_back
         Texture2D knockedTex;
 
         public int posX { get; private set; }
-        int posY;
+        int posY;       
         Vector2 pos;
+
+        int heightInterval = 120;
+        int ishitSpeed = 4;
 
         public Rectangle hitbox;
 
-        public int originalValue { get; private set; }
+        public int originalPos { get; private set; }
 
         public bool isActive;
-        public bool isHit;
+        public bool isHit;        
 
-        private bool goingUp;
-        private bool goingDown;
         private bool hasReachedPeak;
 
         public Mole(Texture2D tex, Texture2D knockedTex, int x, int y)
@@ -37,45 +38,49 @@ namespace Whack_the_mole_the_moles_fight_back
 
             pos = new Vector2(posX, posY);
 
-            hitbox = new Rectangle(x, y, 106, 80);
-            originalValue = (int)pos.Y;
+            hitbox = new Rectangle((int)pos.X + 15, (int)pos.Y, tex.Width - 30 , tex.Height - 70);  // offsets due to sprite
+            originalPos = (int)pos.Y;            
         }
 
         public void update(GameTime gt)
-        {
-           // hitbox.X = (int)pos.X;
-            hitbox.Y = (int)pos.Y;
+        {          
+            hitbox.Y = (int)pos.Y + 50; // offset due to sprite
 
             if (isActive)
             {
-                if (pos.Y >= (originalValue - 120) && !hasReachedPeak && !isHit)
+                if (pos.Y >= (originalPos - heightInterval) && !hasReachedPeak && !isHit)
                     pos.Y -= 1;
-
-                else if (pos.Y <= originalValue && !isHit)
+                
+                else if (pos.Y <= originalPos && !isHit )
                 {
-                    hasReachedPeak = true;
-
+                    hasReachedPeak = true;                    
                     pos.Y += 1;
                 }
-
-                else if (isHit)
-                    pos.Y += 4;
-
-                if (pos.Y >= originalValue && hasReachedPeak)
+                if (isHit)
+                    pos.Y += ishitSpeed;
+                
+                if (pos.Y > originalPos && hasReachedPeak || pos.Y > originalPos && isHit)
                 {
-                    isActive = false;
-                    hasReachedPeak = false;
+                    isHit = false;
+                    isActive = false; 
                 }
             }
+            if (!isActive)
+            {
+                pos.Y = originalPos;
+                isHit = false;
+                hasReachedPeak = false;
+            }            
         }
 
         public void Draw(SpriteBatch sb)
         {
+           // sb.Draw(Game1.debuggRec, hitbox, Color.White);
+
             if (!isHit)
                 sb.Draw(tex, pos, Color.White);
             else
-                sb.Draw(knockedTex, pos, Color.White);
-
+                sb.Draw(knockedTex, pos, Color.White);          
         }
     }
 }

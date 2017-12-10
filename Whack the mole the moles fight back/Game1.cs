@@ -18,6 +18,8 @@ namespace Whack_the_mole_the_moles_fight_back
         Texture2D backgroundTex;
         Texture2D malletTex;
         Texture2D lightningTex;
+        public static Texture2D debuggRec;
+        Rectangle cursor;
 
         Vector2 moleArrayPos;
 
@@ -44,7 +46,7 @@ namespace Whack_the_mole_the_moles_fight_back
        
         protected override void Initialize()
         {
-            this.Window.Position = new Point(0, 0);
+          //  this.Window.Position = new Point(0, 0);
             graphics.PreferredBackBufferHeight = 1600;
             graphics.PreferredBackBufferWidth = 1250;
             graphics.ApplyChanges();
@@ -62,6 +64,7 @@ namespace Whack_the_mole_the_moles_fight_back
             backgroundTex = Content.Load<Texture2D>(@"MOLE_background");
             malletTex = Content.Load<Texture2D>(@"MOLE_mallet");
             lightningTex = Content.Load<Texture2D>(@"MOLE_lightning");
+            debuggRec = Content.Load<Texture2D>(@"debuggRec");
 
             IsMouseVisible = true;
 
@@ -76,7 +79,8 @@ namespace Whack_the_mole_the_moles_fight_back
                     moles[i, j] = new Mole(moleTex, moleKOTex, x, y);
                 }                
             }
-            backgroundColor = new Color(111, 209, 72);           
+            backgroundColor = new Color(111, 209, 72);
+            cursor = new Rectangle(Mouse.GetState().X, Mouse.GetState().Y, 20, 20);
         }
 
        
@@ -91,6 +95,10 @@ namespace Whack_the_mole_the_moles_fight_back
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            mouseState = Mouse.GetState();
+            cursor.X = mouseState.X;
+            cursor.Y = mouseState.Y;
+           // oldMouseState = mouseState;
 
             Activate(gameTime);
             CheckButtonState();
@@ -120,21 +128,15 @@ namespace Whack_the_mole_the_moles_fight_back
         }
         private void CheckButtonState()
         {
-           
-            mouseState = Mouse.GetState();
-            for (int i = 0; i < moles.GetLength(0); i++)
+            foreach (Mole m in moles)
             {
-                for (int j = 0; j < moles.GetLength(1); j++)
-                {
-                    if(moles[i,j].hitbox.Contains(mouseState.Position)
+                if (m.hitbox.Contains(mouseState.Position)
                         && mouseState.LeftButton == ButtonState.Pressed
                         && oldMouseState.LeftButton == ButtonState.Released)
-                    {
-                        moles[i, j].isHit = true;
-                    }
-                    
+                {
+                    m.isHit = true;
                 }
-            }
+            }           
         }
 
         protected override void Draw(GameTime gameTime)
@@ -147,10 +149,11 @@ namespace Whack_the_mole_the_moles_fight_back
                 for (int j = 0; j < moles.GetLength(1); j++)
                 {
                     moles[i, j].Draw(spriteBatch);
-                    spriteBatch.Draw(holeTex, new Vector2(moles[i, j].posX, moles[i, j].originalValue), Color.White);
-                    spriteBatch.Draw(holeForegroundTex, new Vector2(moles[i, j].posX, moles[i, j].originalValue), Color.White);
+                    spriteBatch.Draw(holeTex, new Vector2(moles[i, j].posX, moles[i, j].originalPos), Color.White);
+                    spriteBatch.Draw(holeForegroundTex, new Vector2(moles[i, j].posX, moles[i, j].originalPos), Color.White);
                 }
             }
+            //spriteBatch.Draw(debuggRec, cursor, Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);

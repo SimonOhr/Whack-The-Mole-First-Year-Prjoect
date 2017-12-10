@@ -29,3 +29,4 @@ C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mo
 C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mole the moles fight back\obj\x86\Debug\Whack the mole the moles fight back.exe
 C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mole the moles fight back\obj\x86\Debug\Whack the mole the moles fight back.pdb
 C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mole the moles fight back\obj\x86\Debug\Whack the mole the moles fight back.csproj.CoreCompileInputs.cache
+C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mole the moles fight back\bin\Windows\x86\Debug\Content\debuggRec.xnb
