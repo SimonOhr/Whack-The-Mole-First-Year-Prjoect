@@ -15,7 +15,6 @@ C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mo
 C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mole the moles fight back\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
 C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mole the moles fight back\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
 C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mole the moles fight back\bin\Windows\x86\Debug\SharpDX.XInput.dll
-C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mole the moles fight back\bin\Windows\x86\Debug\SharpDX.RawInput.dll
 C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mole the moles fight back\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
 C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mole the moles fight back\bin\Windows\x86\Debug\MonoGame.Framework.xml
 C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mole the moles fight back\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
@@ -25,8 +24,8 @@ C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mo
 C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mole the moles fight back\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
 C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mole the moles fight back\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
 C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mole the moles fight back\bin\Windows\x86\Debug\SharpDX.XInput.xml
-C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mole the moles fight back\bin\Windows\x86\Debug\SharpDX.RawInput.xml
 C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mole the moles fight back\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
 C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mole the moles fight back\obj\x86\Debug\Whack the mole the moles fight back.csprojResolveAssemblyReference.cache
 C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mole the moles fight back\obj\x86\Debug\Whack the mole the moles fight back.exe
 C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mole the moles fight back\obj\x86\Debug\Whack the mole the moles fight back.pdb
+C:\Users\Simon\Documents\GitHub\Whack-the-mole-the-moles-fight-back\Whack the mole the moles fight back\obj\x86\Debug\Whack the mole the moles fight back.csproj.CoreCompileInputs.cache

@@ -23,12 +23,17 @@ namespace Whack_the_mole_the_moles_fight_back
 
         Mole mole;
 
-        Mole[,] moleArray;
+        Mole[,] moles;
 
         double timer, reset;
         float interval = 1;
 
         Random rnd = new Random();
+
+        MouseState mouseState, oldMouseState;
+      
+
+        Color backgroundColor;
 
         public Game1()
         {
@@ -60,19 +65,18 @@ namespace Whack_the_mole_the_moles_fight_back
 
             IsMouseVisible = true;
 
-            moleArray = new Mole[7, 10];
+            moles = new Mole[7, 10];
 
-            for (int i = 0; i < moleArray.GetLength(0); i++)
+            for (int i = 0; i < moles.GetLength(0); i++)
             {
-                for (int j = 0; j < moleArray.GetLength(1); j++)
+                for (int j = 0; j < moles.GetLength(1); j++)
                 {
                     int x = j * (moleTex.Width + 50);
                     int y = 200 + (i * (moleTex.Height + 50));
-                    moleArray[i, j] = new Mole(moleTex, x, y);
-                }
-                
+                    moles[i, j] = new Mole(moleTex, moleKOTex, x, y);
+                }                
             }
-
+            backgroundColor = new Color(111, 209, 72);           
         }
 
        
@@ -87,34 +91,64 @@ namespace Whack_the_mole_the_moles_fight_back
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            timer += gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (timer > interval)
-            {
-                int molePosY = rnd.Next(0, moleArray.GetLength(0));
-                int molePosX = rnd.Next(0, moleArray.GetLength(1));
-                moleArray[molePosY, molePosX].isActive = true;
-
-                timer = reset;
-            }
-
-            foreach (Mole m in moleArray)
+            Activate(gameTime);
+            CheckButtonState();
+            foreach (Mole m in moles)
             {
                 m.update(gameTime);
             }
             base.Update(gameTime);
         }
 
+        private void Activate(GameTime gameTime)
+        {
+            timer += gameTime.ElapsedGameTime.TotalSeconds;
+            
+            if (timer > interval)
+            {
+                int waveSize = rnd.Next(0, 5);
+                do
+                {
+                    int molePosY = rnd.Next(0, moles.GetLength(0));
+                    int molePosX = rnd.Next(0, moles.GetLength(1));
+                    moles[molePosY, molePosX].isActive = true;
+                    waveSize--;
+                } while (waveSize > 0);                                                         
+                timer = reset;
+            }
+        }
+        private void CheckButtonState()
+        {
+           
+            mouseState = Mouse.GetState();
+            for (int i = 0; i < moles.GetLength(0); i++)
+            {
+                for (int j = 0; j < moles.GetLength(1); j++)
+                {
+                    if(moles[i,j].hitbox.Contains(mouseState.Position)
+                        && mouseState.LeftButton == ButtonState.Pressed
+                        && oldMouseState.LeftButton == ButtonState.Released)
+                    {
+                        moles[i, j].isHit = true;
+                    }
+                    
+                }
+            }
+        }
+
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.ForestGreen);
+            GraphicsDevice.Clear(backgroundColor);
             spriteBatch.Begin();
             spriteBatch.Draw(backgroundTex, new Vector2(0, 0), Color.White);
-            for (int i = 0; i < moleArray.GetLength(0); i++)
+            for (int i = 0; i < moles.GetLength(0); i++)
             {
-                for (int j = 0; j < moleArray.GetLength(1); j++)
+                for (int j = 0; j < moles.GetLength(1); j++)
                 {
-                    moleArray[i, j].Draw(spriteBatch);
+                    moles[i, j].Draw(spriteBatch);
+                    spriteBatch.Draw(holeTex, new Vector2(moles[i, j].posX, moles[i, j].originalValue), Color.White);
+                    spriteBatch.Draw(holeForegroundTex, new Vector2(moles[i, j].posX, moles[i, j].originalValue), Color.White);
                 }
             }
             spriteBatch.End();
